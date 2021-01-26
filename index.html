@@ -16,7 +16,7 @@
       <div class="container">
          <div class="cart">
             <div class="col-md-12 col-lg-10 mx-auto">
-               <div class="cart-item">
+               <div id="cartItem1" class="cart-item">
                   <div class="row">
                      <div class="col-md-7 center-item">
                         <img src="images/product-1.png" alt="">
@@ -25,17 +25,17 @@
 
                      <div class="col-md-5 center-item">
                         <div class="input-group number-spinner">
-                           <button class="btn btn-default"><i class="fas fa-minus"></i></button>
-                           <input type="text" class="form-control text-center" value="1">
-                           <button class="btn btn-default"><i class="fas fa-plus"></i></button>
+                           <button id="decrementBtn1" class="btn btn-default"><i class="fas fa-minus"></i></button>
+                           <input id="quantityField1" type="text" class="form-control text-center" value="1">
+                           <button id="incrementBtn1" class="btn btn-default"><i class="fas fa-plus"></i></button>
                         </div>
-                        <h5>$1219</h5>
-                        <img src="images/remove.png" alt="" class="remove-item">
+                        <h5>$ <span id="phoneAmount">1219</span></h5>
+                        <img id="displayOff1" src="images/remove.png" alt="" class="remove-item">
                      </div>
                   </div>
                </div>
 
-               <div class="cart-item">
+               <div id="cartItem2" class="cart-item">
                   <div class="row">
                      <div class="col-md-7 center-item mx-auto">
                         <img src="images/product-2.png" alt="">
@@ -43,13 +43,13 @@
                      </div>
                      <div class="col-md-5 center-item">
                         <div class="input-group number-spinner">
-                           <button class="btn btn-default"><i class="fas fa-minus"></i></button>
-                           <input type="text" class="form-control text-center" value="1">
-                           <button class="btn btn-default"><i class="fas fa-plus"></i></button>
+                           <button id="decrementBtn2" class="btn btn-default"><i class="fas fa-minus"></i></button>
+                           <input id="quantityField2" type="text" class="form-control text-center" value="1">
+                           <button id="incrementBtn2" class="btn btn-default"><i class="fas fa-plus"></i></button>
 
                         </div>
-                        <h5>$59</h5>
-                        <img src="images/remove.png" alt="" class="remove-item">
+                        <h5>$ <span id="caseAmount">59</span></h5>
+                        <img id="displayOff2" src="images/remove.png" alt="" class="remove-item">
                      </div>
                   </div>
                </div>
@@ -64,9 +64,9 @@
                      </div>
 
                      <div class="col-md-4 status">
-                        <h5>$1,278</h5>
-                        <h5>$0</h5>
-                        <h5>$1,278</h5>
+                        <h5>$ <span id="subTotal">1,278</span></h5>
+                        <h5>$ <span id="tax">0</span></h5>
+                        <h5>$ <span id="total">1,278</span></h5>
                      </div>
                   </div>
                </div>
@@ -77,6 +77,101 @@
          </div>
       </div>
    </section>
+
+   <script>
+      // First Cart
+      // Decrement Button Event Listener
+      var decBtn1 = document.getElementById("decrementBtn1");
+      decBtn1.addEventListener("click", function () {
+         var quantField1 = document.getElementById("quantityField1").value;
+         var quantField1Num = parseFloat(quantField1);
+         if (quantField1Num > 0) {
+            quantField1Num--;
+         }
+
+         document.getElementById("quantityField1").value = quantField1Num;
+         console.log(quantField1Num);
+
+         // To display phone amount
+         // var phoneAmount = document.getElementById("phoneAmount").innerText;
+         // var phoneAmountNumber = parseFloat(phoneAmount);
+         var updatePhoneAmountNumber = 1219 * quantField1Num;
+         document.getElementById("phoneAmount").innerText = updatePhoneAmountNumber;
+
+      })
+
+      // Increment Button Event Listener
+      var incBtn1 = document.getElementById("incrementBtn1");
+      incBtn1.addEventListener("click", function () {
+         var quantField1 = document.getElementById("quantityField1").value;
+         var quantField1Num = parseFloat(quantField1);
+         quantField1Num++;
+         document.getElementById("quantityField1").value = quantField1Num;
+         console.log(quantField1Num);
+
+         // const phoneAmount = document.getElementById("phoneAmount").innerText;
+         // const phoneAmountNumber = parseFloat(phoneAmount);
+         var updatePhoneAmountNumber = 1219 * quantField1Num;
+         document.getElementById("phoneAmount").innerText = updatePhoneAmountNumber;
+
+      })
+
+      // Display hidden
+      var displayOff1 = document.getElementById("displayOff1");
+      displayOff1.addEventListener("click", function(){
+         var cartItem1 = document.getElementById("cartItem1");
+         cartItem1.style.display = "none";
+      })
+
+      // Second Cart
+
+      // Decrement Button Event Listener
+      var decBtn2 = document.getElementById("decrementBtn2");
+      decBtn2.addEventListener("click", function () {
+         var quantField2 = document.getElementById("quantityField2").value;
+         var quantField2Num = parseFloat(quantField2);
+         if (quantField2Num > 0) {
+            quantField2Num--;
+         }
+
+         document.getElementById("quantityField2").value = quantField2Num;
+         console.log(quantField2Num);
+
+         // To display phone amount
+         // var phoneAmount = document.getElementById("phoneAmount").innerText;
+         // var phoneAmountNumber = parseFloat(phoneAmount);
+         var updateCaseAmountNumber = 59 * quantField2Num;
+         document.getElementById("caseAmount").innerText = updateCaseAmountNumber;
+
+      })
+
+      // Increment Button Event Listener
+      var incBtn2 = document.getElementById("incrementBtn2");
+      incBtn2.addEventListener("click", function () {
+         var quantField2 = document.getElementById("quantityField2").value;
+         var quantField2Num = parseFloat(quantField2);
+         quantField2Num++;
+         document.getElementById("quantityField2").value = quantField2Num;
+         console.log(quantField2Num);
+
+         // const phoneAmount = document.getElementById("phoneAmount").innerText;
+         // const phoneAmountNumber = parseFloat(phoneAmount);
+         var updateCaseAmountNumber = 59 * quantField2Num;
+         document.getElementById("caseAmount").innerText = updateCaseAmountNumber;
+
+      })
+
+      // Display hidden
+      var displayOff2 = document.getElementById("displayOff2");
+      displayOff2.addEventListener("click", function(){
+         var cartItem2 = document.getElementById("cartItem2");
+         cartItem2.style.display = "none";
+      })
+
+      
+
+
+   </script>
 </body>
 
 </html>
