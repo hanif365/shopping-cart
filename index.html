@@ -26,10 +26,10 @@
                      <div class="col-md-5 center-item">
                         <div class="input-group number-spinner">
                            <button id="decrementBtn1" class="btn btn-default"><i class="fas fa-minus"></i></button>
-                           <input id="quantityField1" type="text" class="form-control text-center" value="1">
+                           <input id="quantityField1" type="text" class="form-control text-center" value="0">
                            <button id="incrementBtn1" class="btn btn-default"><i class="fas fa-plus"></i></button>
                         </div>
-                        <h5>$ <span id="phoneAmount">1219</span></h5>
+                        <h5>$ <span id="phoneAmount">00</span></h5>
                         <img id="displayOff1" src="images/remove.png" alt="" class="remove-item">
                      </div>
                   </div>
@@ -44,11 +44,11 @@
                      <div class="col-md-5 center-item">
                         <div class="input-group number-spinner">
                            <button id="decrementBtn2" class="btn btn-default"><i class="fas fa-minus"></i></button>
-                           <input id="quantityField2" type="text" class="form-control text-center" value="1">
+                           <input id="quantityField2" type="text" class="form-control text-center" value="0">
                            <button id="incrementBtn2" class="btn btn-default"><i class="fas fa-plus"></i></button>
 
                         </div>
-                        <h5>$ <span id="caseAmount">59</span></h5>
+                        <h5>$ <span id="caseAmount">00</span></h5>
                         <img id="displayOff2" src="images/remove.png" alt="" class="remove-item">
                      </div>
                   </div>
@@ -64,9 +64,9 @@
                      </div>
 
                      <div class="col-md-4 status">
-                        <h5>$ <span id="subTotal">1,278</span></h5>
-                        <h5>$ <span id="tax">0</span></h5>
-                        <h5>$ <span id="total">1,278</span></h5>
+                        <h5>$ <span id="subTotal">00</span></h5>
+                        <h5>$ <span id="tax">00</span></h5>
+                        <h5>$ <span id="total">00</span></h5>
                      </div>
                   </div>
                </div>
@@ -80,14 +80,37 @@
 
    <script>
       // First Cart
-      // Decrement Button Event Listener
+      // Decrement Button Event Listener for phone
       var decBtn1 = document.getElementById("decrementBtn1");
       decBtn1.addEventListener("click", function () {
          var quantField1 = document.getElementById("quantityField1").value;
          var quantField1Num = parseFloat(quantField1);
+         
          if (quantField1Num > 0) {
             quantField1Num--;
+
+            // For subtotal(if value of quantField1Num is less then 0 , subtotal value is not decrease/increase(update))
+            var subTotal = document.getElementById("subTotal").innerText;
+            var subTotalNum = parseFloat(subTotal);
+            subTotalNum = subTotalNum - 1219;
+            document.getElementById("subTotal").innerText = subTotalNum;
+            // console.log("subTotal",subTotalNum);
+
+            //find tax
+            // var tax = document.getElementById("tax").innerText;
+            // var taxNum = parseFloat(tax);
+
+            var taxNum = 10;
+            document.getElementById("tax").innerText = taxNum;
+            
+
+            // find total
+            var total = document.getElementById("total").innerText;
+            var totalNum = parseFloat(total);
+            var grandTotal = totalNum - 1219 - taxNum;
+            document.getElementById("total").innerText = grandTotal;
          }
+         
 
          document.getElementById("quantityField1").value = quantField1Num;
          console.log(quantField1Num);
@@ -98,9 +121,12 @@
          var updatePhoneAmountNumber = 1219 * quantField1Num;
          document.getElementById("phoneAmount").innerText = updatePhoneAmountNumber;
 
+
+
+
       })
 
-      // Increment Button Event Listener
+      // Increment Button Event Listener for phone
       var incBtn1 = document.getElementById("incrementBtn1");
       incBtn1.addEventListener("click", function () {
          var quantField1 = document.getElementById("quantityField1").value;
@@ -114,11 +140,32 @@
          var updatePhoneAmountNumber = 1219 * quantField1Num;
          document.getElementById("phoneAmount").innerText = updatePhoneAmountNumber;
 
+         // For subtotal
+         var subTotal = document.getElementById("subTotal").innerText;
+         var subTotalNum = parseFloat(subTotal);
+         subTotalNum = subTotalNum + 1219;
+         document.getElementById("subTotal").innerText = subTotalNum;
+         console.log(subTotalNum);
+
+         //find tax
+         // var tax = document.getElementById("tax").innerText;
+         // var taxNum = parseFloat(tax);
+
+         const taxNum = 10;
+         document.getElementById("tax").innerText = taxNum;
+
+
+         // find total
+         var total = document.getElementById("total").innerText;
+         var totalNum = parseFloat(total);
+         var grandTotal = totalNum + 1219 + taxNum;
+         document.getElementById("total").innerText = grandTotal;
+
       })
 
       // Display hidden
       var displayOff1 = document.getElementById("displayOff1");
-      displayOff1.addEventListener("click", function(){
+      displayOff1.addEventListener("click", function () {
          var cartItem1 = document.getElementById("cartItem1");
          cartItem1.style.display = "none";
       })
@@ -132,6 +179,13 @@
          var quantField2Num = parseFloat(quantField2);
          if (quantField2Num > 0) {
             quantField2Num--;
+
+            // For subtotal(if value of quantField1Num is less then 0 , subtotal value is not decrease/increase(update))
+            var subTotal = document.getElementById("subTotal").innerText;
+            var subTotalNum = parseFloat(subTotal);
+            subTotalNum = subTotalNum - 59;
+            document.getElementById("subTotal").innerText = subTotalNum;
+            console.log(subTotalNum);
          }
 
          document.getElementById("quantityField2").value = quantField2Num;
@@ -142,6 +196,12 @@
          // var phoneAmountNumber = parseFloat(phoneAmount);
          var updateCaseAmountNumber = 59 * quantField2Num;
          document.getElementById("caseAmount").innerText = updateCaseAmountNumber;
+
+         // // For subtotal
+         // var subTotal = document.getElementById("subTotal").innerText;
+         // var subTotalNum = parseFloat(subTotal);
+         // subTotalNum = subTotalNum - 59;
+         // console.log(subTotalNum);
 
       })
 
@@ -159,16 +219,36 @@
          var updateCaseAmountNumber = 59 * quantField2Num;
          document.getElementById("caseAmount").innerText = updateCaseAmountNumber;
 
+         // For subtotal
+         var subTotal = document.getElementById("subTotal").innerText;
+         var subTotalNum = parseFloat(subTotal);
+         subTotalNum = subTotalNum + 59;
+         document.getElementById("subTotal").innerText = subTotalNum;
+         console.log(subTotalNum);
+
       })
 
       // Display hidden
       var displayOff2 = document.getElementById("displayOff2");
-      displayOff2.addEventListener("click", function(){
+      displayOff2.addEventListener("click", function () {
          var cartItem2 = document.getElementById("cartItem2");
          cartItem2.style.display = "none";
       })
 
-      
+      // Find subtotal
+      // var subTotal = document.getElementById("subTotal").innerText;
+      // var subTotalNum = parseFloat(subTotal);
+      // // console.log(subTotal);
+      // // document.getElementById("subTotal").innerText = updatePhoneAmountNumber + updateCaseAmountNumber;
+      // var phoneGross = document.getElementById("phoneAmount").innerText;
+      // var phoneGrossNum = parseFloat(phoneGross);
+      // console.log(phoneGrossNum);
+
+      // var caseGross = document.getElementById("caseAmount").innerText;
+      // var caseGrossNum = parseFloat(caseGross);
+      // console.log(caseGrossNum);  
+
+      // document.getElementById("subTotal").innerText = phoneGrossNum + caseGrossNum;
 
 
    </script>
